@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_chat"
+        android:enabled="true"
+        android:icon="@drawable/chat"
+        android:title="채팅방"
+        app:showAsAction="always"/>
+
+
+    <item
+        android:id="@+id/menu_home"
+        android:enabled="true"
+        android:icon="@drawable/home"
+        android:title="홈"
+        app:showAsAction="always"/>
+
+
+    <item
+        android:id="@+id/menu_recruitment"
+        android:enabled="true"
+        android:icon="@drawable/person"
+        android:title="모집글"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_setting"
+        android:enabled="true"
+        android:icon="@drawable/setting"
+        android:title="설정"
+        app:showAsAction="always"/>
+</menu>

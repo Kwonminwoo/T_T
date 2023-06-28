@@ -23,10 +23,12 @@ feature은 기능 개발 브랜치에 사용 되는 일반적인 이름.
 우리는 기능 개발하고 master branch에 merge하는 방식으로 할 것이므로 feature/기능명 으로만 구분해서 만들예정. ex) feature/login
 <br><br>
 commit 메시컨벤션<br>
-    - add 기능 추가<br>
-        ex) add: 프로필 이미지 삭제 기능<br>
-    - fix 기능 수정<br>
+    - <b>feat 기능 추가</b><br>
+        ex) feat: 프로필 이미지 삭제 기능<br>
+    - <b>fix 기능 수정</b><br>
         ex) fix: 프로필 이미지 삭제 기능<br>
+    - <b>refactor 코드 리펙토링</b><br>
+        ex) refactor: 프로필 이미지 변수명 변경<br>
 <br><br>
 <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1570106347/noticon/hx52ypkqqdzjdvd8iaid.svg" width="30" height="30"/>
 <a href="https://field-song-800.notion.site/T_T-Taxi_Together-e2e76cb75aae46fdb1274be06deb37b5?p=2a71659747c042b097b2514e3a511349&pm=s">노션 링크</a>
