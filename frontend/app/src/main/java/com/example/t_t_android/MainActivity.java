@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
     ChatFragment chatFragment;
     RecruitmentFragment recruitmentFragment;
     SettingFragment settingFragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
