@@ -15,6 +15,11 @@ import android.widget.Toast;
 
 import com.example.t_t_android.login.LoginFragment;
 import com.google.android.material.navigation.NavigationBarView;
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.User;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
 
 public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i("LOGIN", "로그인 성공 후 네비게이션 바 노출");
             navigationBarView.setVisibility(View.VISIBLE);
             onLoginSuccess();
+
         }
     }
     private void showLoginFragment(){
@@ -61,6 +67,23 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction removeTransaction = removeFragmentManager.beginTransaction();
         removeTransaction.remove(loginFragment).commit();
 
+        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+            @Override
+            public Unit invoke(User user, Throwable error) {
+                if (error != null) {
+                    Log.e("USER_INFO", "사용자 정보 요청 실패", error);
+                    return null;
+                }
+                String nickname = user.getKakaoAccount().getProfile().getNickname();
+                String profileImageUrl = user.getKakaoAccount().getProfile().getProfileImageUrl();
+
+                Bundle userData = new Bundle();
+                userData.putString("nickname", nickname);
+                userData.putString("profileImageUrl", profileImageUrl);
+                settingFragment.setArguments(userData);
+                return null;
+            }
+        });
         FragmentManager loginSuccessFM=getSupportFragmentManager();
         FragmentTransaction loginSuccseeFT = loginSuccessFM.beginTransaction();
         loginSuccseeFT.replace(R.id.main_containers,homeFragment).commit();
@@ -85,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
 
     }
     @Override

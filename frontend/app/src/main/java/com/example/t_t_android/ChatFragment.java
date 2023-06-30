@@ -5,9 +5,16 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.User;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
 
 public class ChatFragment extends Fragment {
     Context context;
@@ -18,4 +25,5 @@ public class ChatFragment extends Fragment {
         context = container.getContext();
         return root;
     }
+
 }
