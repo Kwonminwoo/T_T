@@ -29,6 +29,8 @@ public class LoginFragment extends Fragment {
     {
         return isLoggedIn;
     }
+    public void setIsLoggedIn(boolean isLoggedIn){this.isLoggedIn=isLoggedIn;}
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
