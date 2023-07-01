@@ -54,7 +54,6 @@ public class SettingFragment extends Fragment {
                     .circleCrop()
                     .into(profileImageView);
         }
-
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,7 +66,29 @@ public class SettingFragment extends Fragment {
 
                         }else{
                             Log.i("LOGOUT","로그아웃 성공, SDK에서 토큰 삭제됨");
-                            Toast.makeText(getActivity(), "로그아웃이 성공적으로 되었습니다", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "로그아웃이 성공적으로 처리되었습니다", Toast.LENGTH_SHORT).show();
+                            loginFragment.setIsLoggedIn(false);
+                            Intent intent = new Intent(context, MainActivity.class);
+                            startActivity(intent);
+                        }
+                        return null;
+                    }
+                });
+            }
+        });
+
+        withdrawButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserApiClient.getInstance().unlink(new Function1<Throwable, Unit>() {
+                    @Override
+                    public Unit invoke(Throwable error) {
+                        if (error != null) {
+                            Log.e("UNLINK", "연결 끊기 실패", error);
+                            Toast.makeText(getActivity(), "탈퇴 실패, 다시 시도해주십시오", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.i("UNLINK", "연결 끊기 성공. SDK에서 토큰 삭제됨");
+                            Toast.makeText(getActivity(), "탈퇴가 성공적으로 처리되었습니다", Toast.LENGTH_SHORT).show();
                             loginFragment.setIsLoggedIn(false);
                             Intent intent = new Intent(context, MainActivity.class);
                             startActivity(intent);
