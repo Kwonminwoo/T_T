@@ -1,10 +1,18 @@
 package com.example.t_t_android;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -19,11 +27,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.t_t_android.login.LoginFragment;
 import com.kakao.sdk.user.UserApiClient;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
+import retrofit2.http.Url;
 
 public class SettingFragment extends Fragment {
     private Context context;
@@ -32,6 +42,8 @@ public class SettingFragment extends Fragment {
     private Button logoutButton;
     private Button withdrawButton;
     private LoginFragment loginFragment;
+    private Uri selectedImageUri;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root= inflater.inflate(R.layout.fragment_setting, container,false);
@@ -42,11 +54,11 @@ public class SettingFragment extends Fragment {
         withdrawButton=root.findViewById(R.id.withdrawButton);
         loginFragment=new LoginFragment();
 
+
         Bundle args = getArguments();
-        if (args != null) {
+        if (args != null&&selectedImageUri==null) {
             String nickname = args.getString("nickname");
             String profileImageUrl = args.getString("profileImageUrl");
-
             // 가져온 데이터를 사용하여 UI 업데이트
             nicknameTextView.setText(nickname);
             Glide.with(requireContext())
@@ -54,6 +66,16 @@ public class SettingFragment extends Fragment {
                     .circleCrop()
                     .into(profileImageView);
         }
+
+        profileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                launcher.launch(intent);
+            }
+        });
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,5 +122,23 @@ public class SettingFragment extends Fragment {
         });
         return root;
     }
-
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode()==RESULT_OK){
+                        Log.e("ImageChoose", "result: "+result);
+                        Intent intent = result.getData();
+                        Log.e("ImageChoose", "intent : " + intent);
+                        Uri uri = intent.getData();
+                        Log.e("ImageChoose", "uri : " + uri);
+//                        imageview.setImageURI(uri);
+                        selectedImageUri=uri;
+                        Glide.with(context)
+                                .load(uri)
+                                .apply(RequestOptions.circleCropTransform())
+                                .into(profileImageView);
+                    }
+                }
+            });
 }
