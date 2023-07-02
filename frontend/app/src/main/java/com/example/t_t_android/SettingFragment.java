@@ -64,6 +64,14 @@ public class SettingFragment extends Fragment {
                     .load(profileImageUrl)
                     .circleCrop()
                     .into(profileImageView);
+        }else if(selectedImageUri!=null)
+        {
+            String nickname = args.getString("nickname");
+            nicknameTextView.setText(nickname);
+            Glide.with(requireContext())
+                    .load(selectedImageUri)
+                    .circleCrop()
+                    .into(profileImageView);
         }
 
         profileImageView.setOnClickListener(new View.OnClickListener() {
