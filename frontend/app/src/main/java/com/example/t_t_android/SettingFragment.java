@@ -54,7 +54,6 @@ public class SettingFragment extends Fragment {
         withdrawButton=root.findViewById(R.id.withdrawButton);
         loginFragment=new LoginFragment();
 
-
         Bundle args = getArguments();
         if (args != null&&selectedImageUri==null) {
             String nickname = args.getString("nickname");
@@ -127,11 +126,11 @@ public class SettingFragment extends Fragment {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if(result.getResultCode()==RESULT_OK){
-                        Log.e("ImageChoose", "result: "+result);
+                        Log.i("ImageChoose", "result: "+result);
                         Intent intent = result.getData();
-                        Log.e("ImageChoose", "intent : " + intent);
+                        Log.i("ImageChoose", "intent : " + intent);
                         Uri uri = intent.getData();
-                        Log.e("ImageChoose", "uri : " + uri);
+                        Log.i("ImageChoose", "uri : " + uri);
 //                        imageview.setImageURI(uri);
                         selectedImageUri=uri;
                         Glide.with(context)
