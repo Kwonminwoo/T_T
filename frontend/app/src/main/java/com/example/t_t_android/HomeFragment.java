@@ -27,7 +27,7 @@ import net.daum.mf.map.api.MapView;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements MapView.CurrentLocationEventListener, MapView.MapViewEventListener {
     private MapView mapView;
     private ViewGroup mapViewContainer;
     Context context;
@@ -38,13 +38,13 @@ public class HomeFragment extends Fragment {
         context = container.getContext();
 
         // 권한ID를 가져옵니다
-        int permission = ContextCompat.checkSelfPermission(this,
-                android.Manifest.permission.INTERNET);
+        int permission = ContextCompat.checkSelfPermission(context,
+                Manifest.permission.INTERNET);
 
-        int permission2 = ContextCompat.checkSelfPermission(this,
+        int permission2 = ContextCompat.checkSelfPermission(context,
                 android.Manifest.permission.ACCESS_FINE_LOCATION);
 
-        int permission3 = ContextCompat.checkSelfPermission(this,
+        int permission3 = ContextCompat.checkSelfPermission(context,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION);
 
         // 권한이 열려있는지 확인
@@ -56,27 +56,18 @@ public class HomeFragment extends Fragment {
                         new String[]{android.Manifest.permission.INTERNET, android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                         1000);
             }
-            return;
+            return root;
         }
 
         //지도를 띄우자
-        mapView = new net.daum.mf.map.api.MapView(this);
-        mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
+        mapView = new net.daum.mf.map.api.MapView(context);
+        mapViewContainer = (ViewGroup) root.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
-        mapView.setMapViewEventListener(this);
+        mapView.setMapViewEventListener((MapView.MapViewEventListener) this);
         mapView.setCurrentLocationTrackingMode(net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
 
 
         return root;
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        onCreateView(R.layout.fragment_home);
-
-
-
     }
 
     // 권한 체크 이후로직
@@ -95,76 +86,78 @@ public class HomeFragment extends Fragment {
                 }
             }
 
-            // 권한 체크에 동의를 하지 않으면 안드로이드 종료
+            /*
+            // 권한 체크 동의
             if (check_result == false) {
-                finish();
+                getActivity().finish();
             }
+
+             */
         }
     }
 
     @Override
-    public void onCurrentLocationUpdate(net.daum.mf.map.api.MapView mapView, MapPoint mapPoint, float v) {
+    public void onCurrentLocationUpdate(MapView mapView, MapPoint mapPoint, float v) {
 
     }
 
     @Override
-    public void onCurrentLocationDeviceHeadingUpdate(net.daum.mf.map.api.MapView mapView, float v) {
+    public void onCurrentLocationDeviceHeadingUpdate(MapView mapView, float v) {
 
     }
 
     @Override
-    public void onCurrentLocationUpdateFailed(net.daum.mf.map.api.MapView mapView) {
+    public void onCurrentLocationUpdateFailed(MapView mapView) {
 
     }
 
     @Override
-    public void onCurrentLocationUpdateCancelled(net.daum.mf.map.api.MapView mapView) {
+    public void onCurrentLocationUpdateCancelled(MapView mapView) {
 
     }
 
     @Override
-    public void onMapViewInitialized(net.daum.mf.map.api.MapView mapView) {
+    public void onMapViewInitialized(MapView mapView) {
 
     }
 
     @Override
-    public void onMapViewCenterPointMoved(net.daum.mf.map.api.MapView mapView, MapPoint mapPoint) {
+    public void onMapViewCenterPointMoved(MapView mapView, MapPoint mapPoint) {
 
     }
 
     @Override
-    public void onMapViewZoomLevelChanged(net.daum.mf.map.api.MapView mapView, int i) {
+    public void onMapViewZoomLevelChanged(MapView mapView, int i) {
 
     }
 
     @Override
-    public void onMapViewSingleTapped(net.daum.mf.map.api.MapView mapView, MapPoint mapPoint) {
+    public void onMapViewSingleTapped(MapView mapView, MapPoint mapPoint) {
 
     }
 
     @Override
-    public void onMapViewDoubleTapped(net.daum.mf.map.api.MapView mapView, MapPoint mapPoint) {
+    public void onMapViewDoubleTapped(MapView mapView, MapPoint mapPoint) {
 
     }
 
     @Override
-    public void onMapViewLongPressed(net.daum.mf.map.api.MapView mapView, MapPoint mapPoint) {
+    public void onMapViewLongPressed(MapView mapView, MapPoint mapPoint) {
 
     }
 
     @Override
-    public void onMapViewDragStarted(net.daum.mf.map.api.MapView mapView, MapPoint mapPoint) {
+    public void onMapViewDragStarted(MapView mapView, MapPoint mapPoint) {
 
     }
 
     @Override
-    public void onMapViewDragEnded(net.daum.mf.map.api.MapView mapView, MapPoint mapPoint) {
+    public void onMapViewDragEnded(MapView mapView, MapPoint mapPoint) {
 
     }
 
     @Override
-    public void onMapViewMoveFinished(net.daum.mf.map.api.MapView mapView, MapPoint mapPoint) {
+    public void onMapViewMoveFinished(MapView mapView, MapPoint mapPoint) {
 
     }
-
 }
