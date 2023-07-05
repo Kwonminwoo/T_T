@@ -42,10 +42,14 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
                 Manifest.permission.INTERNET);
 
         int permission2 = ContextCompat.checkSelfPermission(context,
-                android.Manifest.permission.ACCESS_FINE_LOCATION);
+                Manifest.permission.ACCESS_FINE_LOCATION);
 
         int permission3 = ContextCompat.checkSelfPermission(context,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION);
+                Manifest.permission.ACCESS_COARSE_LOCATION);
+
+        Log.e("permission", String.valueOf(permission));
+        Log.e("permission2", String.valueOf(permission2));
+        Log.e("permission3", String.valueOf(permission3));
 
         // 권한이 열려있는지 확인
         if (permission == PackageManager.PERMISSION_DENIED || permission2 == PackageManager.PERMISSION_DENIED || permission3 == PackageManager.PERMISSION_DENIED) {
@@ -53,19 +57,17 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 // 권한 체크(READ_PHONE_STATE의 requestCode를 1000으로 세팅
                 requestPermissions(
-                        new String[]{android.Manifest.permission.INTERNET, android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                        new String[]{Manifest.permission.INTERNET, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                         1000);
             }
-            return root;
+            return null;
         }
-
         //지도를 띄우자
-        mapView = new net.daum.mf.map.api.MapView(context);
+        mapView = new MapView(getActivity());
         mapViewContainer = (ViewGroup) root.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
-        mapView.setMapViewEventListener((MapView.MapViewEventListener) this);
-        mapView.setCurrentLocationTrackingMode(net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
-
+        mapView.setMapViewEventListener(this);
+        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
 
         return root;
     }
@@ -85,14 +87,10 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
                     break;
                 }
             }
-
-            /*
             // 권한 체크 동의
             if (check_result == false) {
                 getActivity().finish();
             }
-
-             */
         }
     }
 
