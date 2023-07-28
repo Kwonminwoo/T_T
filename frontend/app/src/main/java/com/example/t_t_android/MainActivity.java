@@ -2,6 +2,7 @@ package com.example.t_t_android;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.RecursiveAction;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     ChatFragment chatFragment;
     RecruitmentFragment recruitmentFragment;
     SettingFragment settingFragment;
+    WriteRecruitmentFragment writeRecruitmentFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +39,11 @@ public class MainActivity extends AppCompatActivity {
         chatFragment = new ChatFragment();
         recruitmentFragment = new RecruitmentFragment();
         settingFragment = new SettingFragment();
+
         getSupportFragmentManager().beginTransaction().replace(R.id.main_containers, homeFragment).commit();
         NavigationBarView navigationBarView = findViewById(R.id.bottom_navigationView);
         navigationBarView.setSelectedItemId(R.id.menu_home);
+
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -59,6 +64,17 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
 
+    public void onFragmentChange(int index){
+        if (writeRecruitmentFragment == null) {
+            writeRecruitmentFragment = new WriteRecruitmentFragment();
+        }
+
+        if(index == 0){
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_containers, recruitmentFragment).commit();
+        } else if(index == 1){
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_containers, writeRecruitmentFragment).commit();
+        }
     }
 }
