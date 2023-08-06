@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.example.t_t_android.ImageDB.ImageDBHelper;
 import com.example.t_t_android.login.LoginFragment;
 import com.google.android.material.navigation.NavigationBarView;
 import com.kakao.sdk.user.UserApiClient;
@@ -20,6 +23,7 @@ import com.kakao.sdk.user.model.User;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
+import retrofit2.http.Url;
 
 public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
@@ -75,11 +79,14 @@ public class MainActivity extends AppCompatActivity {
                     return null;
                 }
                 String nickname = user.getKakaoAccount().getProfile().getNickname();
-                String profileImageUrl = user.getKakaoAccount().getProfile().getProfileImageUrl();
-
+                Uri profileImageUri  = Uri.parse(user.getKakaoAccount().getProfile().getProfileImageUrl());
                 Bundle userData = new Bundle();
                 userData.putString("nickname", nickname);
-                userData.putString("profileImageUrl", profileImageUrl);
+                ImageDBHelper imageDBHelper = new ImageDBHelper(MainActivity.this);
+                if(imageDBHelper.loadImageFromDatabase()==null)
+                {
+                    imageDBHelper.saveImageToDatabase(profileImageUri);
+                }
                 settingFragment.setArguments(userData);
                 return null;
             }
