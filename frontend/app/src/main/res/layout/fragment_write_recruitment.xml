@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:layout_marginBottom="1dp"
         >
-        <LinearLayout
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -30,20 +30,136 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="130dp"
                 android:text="글쓰기"
-                android:textSize="56px"/>
+                android:textSize="56px" />
 
-        </LinearLayout>
+            <Button
+                android:id="@+id/completeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="완료"></Button>
 
+        </GridLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#8C8C8C"
+            android:background="#CFCFCF"
             android:layout_gravity="bottom"/>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="제목"
+                android:textSize="80px"
+                android:layout_marginTop="12dp"></EditText>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/starting_point"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:hint="출발지를 입력해주세요."
+                    android:gravity="start"
+                    android:textSize="50px"
+                    android:layout_marginTop="12dp"></EditText>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/close_icon1_by_Freepik"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:background="#ffffff">
+                </ImageButton>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/destination"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:hint="목적지를 입력해주세요."
+                    android:gravity="start"
+                    android:textSize="50px"
+                    android:layout_marginTop="12dp"></EditText>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:background="#ffffff"
+                    android:src="@drawable/close_icon1_by_Freepik"></ImageButton>
+            </LinearLayout>
+
+
+
+            <EditText
+                android:id="@+id/sub_contents"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:hint="내용을 입력해주세요."
+                android:gravity="start"
+                android:background="@android:color/transparent"
+                android:textSize="50px"
+                android:layout_marginTop="12dp"></EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/write_map"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="인원"
+                android:textSize="60px"></TextView>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/">
+
+            </ImageButton>
+
+            
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </RelativeLayout>
+
+</LinearLayout>

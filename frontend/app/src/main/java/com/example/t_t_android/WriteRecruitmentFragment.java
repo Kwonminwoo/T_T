@@ -13,19 +13,41 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.t_t_android.home.UserMarkerObject;
 import com.google.android.material.navigation.NavigationBarView;
+
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapView;
+
+import java.util.List;
+import java.util.PriorityQueue;
 
 public class WriteRecruitmentFragment extends Fragment {
     Context context;
+    private MapView mapView;
+    private ViewGroup mapViewContainer;
+    private PriorityQueue<MapPOIItem> mapPOIItemPriorityQueue;
 
     ImageButton closeBtn;
+    Button completeBtn;
+    HomeFragment homeFragment = new HomeFragment();
+    private EditText title, starting_point, destination;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root= inflater.inflate(R.layout.fragment_write_recruitment, container,false);
         context = container.getContext();
+
+        if(homeFragment.isPermission()){
+            mapView = new MapView(getActivity());
+            mapViewContainer = (ViewGroup) root.findViewById(R.id.map_view);
+            mapViewContainer.addView(mapView);
+        }
+
         hideBottomNavigation(true);
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
@@ -39,6 +61,26 @@ public class WriteRecruitmentFragment extends Fragment {
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_containers, new RecruitmentFragment()) // 이전 프래그먼트로 전환합니다.
                         .commit();
+            }
+        });
+
+        title = root.findViewById(R.id.title);
+        starting_point = root.findViewById(R.id.starting_point);
+        destination = root.findViewById(R.id.destination);
+
+
+        // UserMarkerObject(String arrival, double latitude, double longitude, int head_cnt)
+        completeBtn = root.findViewById(R.id.completeBtn);
+        completeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String title_input = null;
+                double starting_point_latitude = 0, starting_point_longitude = 0, destination_latitude = 0, destination_longitude = 0;
+                title_input = title.getText().toString();
+                int head_cnt = 0;
+
+                mapPOIItemPriorityQueue.offer(new MapPOIItem());
+                mapPOIItemPriorityQueue.peek().setUserObject(new UserMarkerObject(title_input, starting_point_latitude, starting_point_longitude, head_cnt));
             }
         });
 
