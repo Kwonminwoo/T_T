@@ -109,6 +109,7 @@ public class SettingFragment extends Fragment {
                             loginFragment.setIsLoggedIn(false);
                             Intent intent = new Intent(context, MainActivity.class);
                             startActivity(intent);
+                            imageDBHelper.initDB();
                         }
                         return null;
                     }
