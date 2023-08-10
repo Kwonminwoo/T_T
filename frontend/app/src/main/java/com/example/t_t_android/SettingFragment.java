@@ -48,6 +48,7 @@ public class SettingFragment extends Fragment {
     private ImageView profileImageView;
     private Button logoutButton;
     private Button withdrawButton;
+    private Button profileChangeButton;
     private LoginFragment loginFragment;
     private ImageDBHelper imageDBHelper;
     private int PERMISSION_REQUEST_CODE = 1;
@@ -59,6 +60,7 @@ public class SettingFragment extends Fragment {
         profileImageView = root.findViewById(R.id.profileImageView);
         logoutButton = root.findViewById(R.id.logoutButton);
         withdrawButton = root.findViewById(R.id.withdrawButton);
+        profileChangeButton=root.findViewById(R.id.profileChangeButton);
         loginFragment = new LoginFragment();
         imageDBHelper = new ImageDBHelper(context);
         Bundle args = getArguments();
@@ -71,7 +73,7 @@ public class SettingFragment extends Fragment {
                     .circleCrop()
                     .into(profileImageView);
         }
-        profileImageView.setOnClickListener(new View.OnClickListener() {
+        profileChangeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_MEDIA_IMAGES)
