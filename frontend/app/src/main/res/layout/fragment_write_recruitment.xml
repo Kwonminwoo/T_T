@@ -83,7 +83,7 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/close_icon1_by_Freepik"
+                    android:src="@drawable/close_icon_24px_by_inkubators"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:background="#ffffff">
@@ -109,7 +109,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:background="#ffffff"
-                    android:src="@drawable/close_icon1_by_Freepik"></ImageButton>
+                    android:src="@drawable/close_icon_24px_by_inkubators"></ImageButton>
             </LinearLayout>
 
 
@@ -136,24 +136,54 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp">
+            android:layout_marginLeft="20sp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="인원"
                 android:textSize="60px"></TextView>
-            <ImageButton
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/">
+                android:orientation="horizontal"
+                android:background="#ECECEC"
+                android:layout_gravity="right"
+                android:layout_marginRight="20sp">
+                <ImageButton
+                    android:id="@+id/plus_people_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/add_icon_big_by_joalfa">
 
-            </ImageButton>
+                </ImageButton>
+
+                <TextView
+                    android:id="@+id/people_cnt_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="60px"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="0"></TextView>
+
+                <ImageButton
+                    android:id="@+id/minus_people_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/minus_icon24px_by_inkubators">
+
+                </ImageButton>
+
+            </LinearLayout>
+
 
             
-        </LinearLayout>
+        </GridLayout>
     </LinearLayout>
 
     <RelativeLayout

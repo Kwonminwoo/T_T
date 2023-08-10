@@ -44,7 +44,7 @@ public class WriteRecruitmentFragment extends Fragment {
 
         if(homeFragment.isPermission()){
             mapView = new MapView(getActivity());
-            mapViewContainer = (ViewGroup) root.findViewById(R.id.map_view);
+            mapViewContainer = (ViewGroup) root.findViewById(R.id.write_map);
             mapViewContainer.addView(mapView);
         }
 
@@ -80,10 +80,12 @@ public class WriteRecruitmentFragment extends Fragment {
                 int head_cnt = 0;
 
                 mapPOIItemPriorityQueue.offer(new MapPOIItem());
-                mapPOIItemPriorityQueue.peek().setUserObject(new UserMarkerObject(title_input, starting_point_latitude, starting_point_longitude, head_cnt));
+                mapPOIItemPriorityQueue.peek().setUserObject(new UserMarkerObject(title_input,
+                        starting_point_latitude, starting_point_longitude, destination_latitude, destination_longitude, head_cnt));
             }
         });
 
+        // 닫기 버튼
         closeBtn = root.findViewById(R.id.closeBtn);
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +98,6 @@ public class WriteRecruitmentFragment extends Fragment {
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_containers, new RecruitmentFragment())
                         .commit();
-
             }
         });
 
