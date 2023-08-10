@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 ImageDBHelper imageDBHelper = new ImageDBHelper(MainActivity.this);
                 if(imageDBHelper.loadImageFromDatabase()==null)
                 {
-                    imageDBHelper.saveImageToDatabase(profileImageUri);
+                    imageDBHelper.saveUserProfileToDatabase(nickname, profileImageUri);
                 }
                 settingFragment.setArguments(userData);
                 return null;

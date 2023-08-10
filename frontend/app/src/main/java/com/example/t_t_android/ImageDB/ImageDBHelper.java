@@ -8,12 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 
 public class ImageDBHelper extends SQLiteOpenHelper {
-    private static final String DB_NAME = "profileImage.db";
-    private static final String TABLE_NAME = "profileImage";
-    private static final String COLUMN_ID = "photoID";
+    private static final String DB_NAME = "profile.db";
+    private static final String TABLE_NAME = "profile";
+    private static final String COLUMN_ID = "keyID";
     private static final String COLUMN_PHOTO_URI = "photoURI";
+    private static final String COLUMN_USER_ID="userID";
     private Context context;
-
 
     public ImageDBHelper(Context context) {
         super(context, DB_NAME, null, 1);
@@ -24,7 +24,7 @@ public class ImageDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                COLUMN_PHOTO_URI + " TEXT" +
+                COLUMN_PHOTO_URI + " TEXT," + COLUMN_USER_ID + " TEXT"+
                 ")");
     }
 
@@ -36,13 +36,15 @@ public class ImageDBHelper extends SQLiteOpenHelper {
 
     //DB 생성
 
-    public void saveImageToDatabase(Uri imageUri) {
+    public void saveUserProfileToDatabase(String userID, Uri imageUri) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_ID, userID);
         values.put(COLUMN_PHOTO_URI, imageUri.toString());
         long rowId = db.insert(TABLE_NAME, null, values);
         db.close();
     }
+
 
     public Uri loadImageFromDatabase() {
         SQLiteDatabase db = getReadableDatabase();

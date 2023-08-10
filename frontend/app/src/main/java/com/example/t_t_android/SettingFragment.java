@@ -51,6 +51,7 @@ public class SettingFragment extends Fragment {
     private Button profileChangeButton;
     private LoginFragment loginFragment;
     private ImageDBHelper imageDBHelper;
+    private String nickname;
     private int PERMISSION_REQUEST_CODE = 1;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class SettingFragment extends Fragment {
         loginFragment = new LoginFragment();
         imageDBHelper = new ImageDBHelper(context);
         Bundle args = getArguments();
-        String nickname = args.getString("nickname");
+        nickname = args.getString("nickname");
         nicknameTextView.setText(nickname);
         if (imageDBHelper.loadImageFromDatabase()!= null) {
             // 가져온 데이터를 사용하여 UI 업데이트
@@ -155,7 +156,7 @@ public class SettingFragment extends Fragment {
                         if (intent != null) {
                             Uri uri = intent.getData();
                             if (uri != null) {
-                                imageDBHelper.saveImageToDatabase(uri);
+                                imageDBHelper.saveUserProfileToDatabase(nickname, uri);
                                 Glide.with(context)
                                         .load(imageDBHelper.loadImageFromDatabase())
                                         .apply(RequestOptions.circleCropTransform())
