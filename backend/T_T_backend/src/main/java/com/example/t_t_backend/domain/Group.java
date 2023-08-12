@@ -1,9 +1,7 @@
 package com.example.t_t_backend.domain;
 
-import java.util.List;
-
 public class Group {
     Long id;
+    String name;
     Article article;
-    List<User> userList;
 }
