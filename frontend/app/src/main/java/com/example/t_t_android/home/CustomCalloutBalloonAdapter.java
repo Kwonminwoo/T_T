@@ -20,6 +20,7 @@ public class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
         title = mCalloutBalloon.findViewById(R.id.ball_tv_title);
         people_cnt = mCalloutBalloon.findViewById(R.id.ball_tv_people_cnt);
     }
+
     // 마커 클릭 시 나오는 말풍선
     @Override
     public View getCalloutBalloon(MapPOIItem poiItem) {

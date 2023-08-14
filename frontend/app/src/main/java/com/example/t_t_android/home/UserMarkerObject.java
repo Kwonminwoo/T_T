@@ -1,75 +1,83 @@
 package com.example.t_t_android.home;
 
 public class UserMarkerObject {
-    private int head_cnt;
+    private int peopleCnt;
     private String arrival;
 
-    private double starting_point_latitude;
-    private double starting_point_longitude;
+    private double startLat;
+    private double startLon;
 
-    private double destination_latitude;
-    private double destination_longitude;
+    private double endLat;
+    private double endLon;
+    private String content;
 
-    public UserMarkerObject(String arrival, double starting_point_latitude, double starting_point_longitude,
-                            double destination_latitude, double destination_longitude, int head_cnt) {
+    public UserMarkerObject() {
+        this.peopleCnt = 1;
+    }
+
+    public UserMarkerObject(String arrival, double startLat, double startLon,
+                            double endLat, double endLon, int peopleCnt) {
         this.arrival = arrival;
-        this.starting_point_latitude = starting_point_latitude;
-        this.starting_point_longitude = starting_point_longitude;
-        this.destination_latitude = destination_latitude;
-        this.destination_longitude = destination_longitude;
-        this.head_cnt = head_cnt;
+        this.startLat = startLat;
+        this.startLon = startLon;
+        this.endLat = endLat;
+        this.endLon = endLon;
+        this.peopleCnt = peopleCnt;
     }
 
     public void setHead_cnt(int head_cnt) {
-        this.head_cnt = head_cnt;
+        this.peopleCnt = head_cnt;
     }
 
     public void setArrival(String arrival) {
         this.arrival = arrival;
     }
 
-    public double getStarting_point_latitude() {
-        return starting_point_latitude;
+    public double getStartLat() {
+        return startLat;
     }
 
-    public double getStarting_point_longitude() {
-        return starting_point_longitude;
+    public double getStartLon() {
+        return startLon;
     }
 
-    public double getDestination_latitude() {
-        return destination_latitude;
+    public double getEndLat() {
+        return endLat;
     }
 
-    public double getDestination_longitude() {
-        return destination_longitude;
+    public double getEndLon() {
+        return endLon;
     }
 
-    public int getHead_cnt() {
-        return head_cnt;
+    public int getPeopleCnt() {
+        return peopleCnt;
     }
 
     public String getArrival() {
         return arrival;
     }
 
-    public void setStarting_point_latitude(double starting_point_latitude) {
-        this.starting_point_latitude = starting_point_latitude;
+    public String getContent() { return content; }
+
+    public void setStartLat(double startLat) {
+        this.startLat = startLat;
     }
 
-    public void setStarting_point_longitude(double starting_point_longitude) {
-        this.starting_point_longitude = starting_point_longitude;
+    public void setStartLon(double startLon) {
+        this.startLon = startLon;
     }
 
-    public void setDestination_latitude(double destination_latitude) {
-        this.destination_latitude = destination_latitude;
+    public void setEndLat(double endLat) {
+        this.endLat = endLat;
     }
 
-    public void setDestination_longitude(double destination_longitude) {
-        this.destination_longitude = destination_longitude;
+    public void setEndLon(double endLon) {
+        this.endLon = endLon;
     }
+    public void setContent(String content) { this.content = content; }
 
     public String userInfo() {
-        return "인원 " + getHead_cnt() + "/4";
+        return "인원 " + getPeopleCnt() + "/4";
     }
 
 }

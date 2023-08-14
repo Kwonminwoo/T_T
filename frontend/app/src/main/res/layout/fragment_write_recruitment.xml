@@ -49,147 +49,151 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/write_recruitment_scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="제목"
-                android:textSize="80px"
-                android:layout_marginTop="12dp"></EditText>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/starting_point"
-                    android:layout_width="300dp"
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="출발지를 입력해주세요."
+                    android:hint="제목"
+                    android:textSize="80px"
+                    android:layout_marginTop="12dp"></EditText>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/start_et"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:hint="출발지를 입력해주세요."
+                        android:gravity="start"
+                        android:textSize="50px"
+                        android:layout_marginTop="12dp"></EditText>
+
+                    <ImageButton
+                        android:id="@+id/erase_start_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/close_icon_24px_by_inkubators"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:background="#ffffff">
+                    </ImageButton>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/end_et"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:hint="목적지를 입력해주세요."
+                        android:gravity="start"
+                        android:textSize="50px"
+                        android:layout_marginTop="12dp"></EditText>
+
+                    <ImageButton
+                        android:id="@+id/erase_end_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:background="#ffffff"
+                        android:src="@drawable/close_icon_24px_by_inkubators"></ImageButton>
+                </LinearLayout>
+
+
+
+                <EditText
+                    android:id="@+id/sub_contents"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:hint="내용을 입력해주세요."
                     android:gravity="start"
+                    android:background="@android:color/transparent"
                     android:textSize="50px"
                     android:layout_marginTop="12dp"></EditText>
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/close_icon_24px_by_inkubators"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:background="#ffffff">
-                </ImageButton>
             </LinearLayout>
-
-            <LinearLayout
+            <GridLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/destination"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:hint="목적지를 입력해주세요."
-                    android:gravity="start"
-                    android:textSize="50px"
-                    android:layout_marginTop="12dp"></EditText>
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:background="#ffffff"
-                    android:src="@drawable/close_icon_24px_by_inkubators"></ImageButton>
-            </LinearLayout>
-
-
-
-            <EditText
-                android:id="@+id/sub_contents"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:inputType="textMultiLine"
-                android:scrollbars="vertical"
-                android:hint="내용을 입력해주세요."
-                android:gravity="start"
-                android:background="@android:color/transparent"
-                android:textSize="50px"
-                android:layout_marginTop="12dp"></EditText>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/write_map"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20sp">
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="인원"
-                android:textSize="60px"></TextView>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="#ECECEC"
-                android:layout_gravity="right"
-                android:layout_marginRight="20sp">
-                <ImageButton
-                    android:id="@+id/plus_people_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/add_icon_big_by_joalfa">
-
-                </ImageButton>
-
+                android:layout_marginLeft="10sp"
+                android:layout_marginBottom="10sp">
                 <TextView
-                    android:id="@+id/people_cnt_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="60px"
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginRight="20sp"
-                    android:layout_gravity="center_vertical"
-                    android:text="0"></TextView>
+                    android:text="인원"
+                    android:textSize="60px"></TextView>
 
-                <ImageButton
-                    android:id="@+id/minus_people_btn"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/minus_icon24px_by_inkubators">
+                    android:orientation="horizontal"
+                    android:background="#ECECEC"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="20sp">
+                    <ImageButton
+                        android:id="@+id/minus_people_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/minus_icon24px_by_inkubators">
 
-                </ImageButton>
+                    </ImageButton>
+
+                    <TextView
+                        android:id="@+id/people_cnt_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="60px"
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="20sp"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="#000000"
+                        android:text="1"></TextView>
+
+                    <ImageButton
+                        android:id="@+id/plus_people_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/add_icon_big_by_joalfa">
+
+                    </ImageButton>
+
+                </LinearLayout>
+
+            </GridLayout>
+
+            <LinearLayout
+                android:id="@+id/write_map"
+                android:layout_width="match_parent"
+                android:layout_height="500sp"
+                android:orientation="vertical">
 
             </LinearLayout>
 
 
-            
-        </GridLayout>
-    </LinearLayout>
+        </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </RelativeLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -71,6 +71,7 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
     private MarkerEventListener eventListener;
     private int permission, permission2, permission3;
 
+    private boolean check_result;
     FloatingActionButton my_location_Btn;
 
     public boolean isPermission() {
@@ -138,7 +139,7 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
             public void onClick(View view) {
                 // 현재 위치를 가져옵니다.
                 LocationManager lm = (LocationManager) context.getSystemService(LOCATION_SERVICE);
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
                 Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -152,30 +153,19 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
             }
         });
 
-        // 마커 객체(UserMarkerObject) 생성 : 생성자 (String 도착지, double 위도, double 경도, int 인원수)
-        // MapPOIItem 객체에 마커 객체를 생성하여 마커 정보를 불러오고 지도에 마커를 찍음
-        // setItemName 메서드는 꼭 써야하나봄
 
+        // 마커객체 활용 예시
+        double startLat = 37.491046, startLon = 126.745065, endLat = 37.487639, endLon = 126.752917;
         MapPOIItem marker = new MapPOIItem();
-        UserMarkerObject u1 = new UserMarkerObject("OO병원 행 택시", 37.491046, 126.745065, 1);
-        marker.setUserObject(u1);
-        marker.setItemName(u1.getArrival());
-        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(u1.getLatitude(),u1.getLongitude()));
+        UserMarkerObject userMarkerObject = new UserMarkerObject("OO병원 행 택시", startLat, startLon, endLat, endLon, 1);
+        userMarkerObject.setContent("00병원에 갈 사람을 모집합니다.");
+        marker.setUserObject(userMarkerObject);
+        marker.setItemName(userMarkerObject.getArrival());
+        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(userMarkerObject.getStartLat(), userMarkerObject.getStartLon()));
         marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
         marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
 
         mapView.addPOIItem(marker);
-
-
-        MapPOIItem marker2 = new MapPOIItem();
-        UserMarkerObject u2 = new UserMarkerObject("OO역 행 택시", 37.487639, 126.752917, 2);
-        marker2.setUserObject(u2);
-        marker2.setMapPoint(MapPoint.mapPointWithGeoCoord(u2.getLatitude(),u2.getLongitude()));
-        marker2.setItemName(u2.getArrival());
-        marker2.setMarkerType(MapPOIItem.MarkerType.BluePin);
-        marker2.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-
-        mapView.addPOIItem(marker2);
 
         return root;
     }
@@ -186,7 +176,7 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
         // READ_PHONE_STATE의 권한 체크 결과를 불러온다
         super.onRequestPermissionsResult(requestCode, permissions, grandResults);
         if (requestCode == 1000) {
-            boolean check_result = true;
+            check_result = true;
 
             // 모든 퍼미션을 허용했는지 체크
             for (int result : grandResults) {

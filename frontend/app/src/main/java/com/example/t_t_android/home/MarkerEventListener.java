@@ -12,6 +12,8 @@ import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import org.w3c.dom.Text;
+
 // 말풍선 클릭 시 리스너 (바텀시트)
 public class MarkerEventListener implements MapView.POIItemEventListener{
     private BottomSheetDialog bottomSheetDialog;
@@ -48,10 +50,23 @@ public class MarkerEventListener implements MapView.POIItemEventListener{
 
         // 바텀시트에 객체 정보 띄우기
         UserMarkerObject userMarkerObject = (UserMarkerObject) poiItem.getUserObject();
-        TextView titleTextView = bottomSheetDialog.findViewById(R.id.bottom_sheet_title);
-        ((TextView)titleTextView).setText(userMarkerObject.getArrival());
-        TextView infoTextView = bottomSheetDialog.findViewById(R.id.bottom_sheet_info);
-        ((TextView)infoTextView).setText(userMarkerObject.userInfo());
+
+        TextView BStitle = bottomSheetDialog.findViewById(R.id.bottom_sheet_title);
+        ((TextView)BStitle).setText(userMarkerObject.getArrival());
+
+        TextView BScontent = bottomSheetDialog.findViewById(R.id.bottom_sheet_contents);
+        ((TextView)BScontent).setText(userMarkerObject.getContent());
+
+        TextView BSstartLocation = bottomSheetDialog.findViewById(R.id.bottom_sheet_start_location);
+        ((TextView)BSstartLocation).setText("출발지 : 위도 " + userMarkerObject.getStartLat()
+                + ", 경도 " + userMarkerObject.getStartLon());
+
+        TextView BSendLocation = bottomSheetDialog.findViewById(R.id.bottom_sheet_end_location);
+        ((TextView)BSendLocation).setText("도착지 : 위도 " + userMarkerObject.getEndLat()
+                + ", 경도 " + userMarkerObject.getEndLon());
+
+        TextView BSpeopleCntInfo = bottomSheetDialog.findViewById(R.id.bottom_sheet_people_info);
+        ((TextView)BSpeopleCntInfo).setText(userMarkerObject.userInfo());
     }
 
     @Override
