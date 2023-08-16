@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.example.t_t_android.home.UserMarkerObject;
 import com.google.android.material.navigation.NavigationBarView;
 
+import net.daum.android.map.coord.MapCoord;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
@@ -38,7 +39,7 @@ import net.daum.mf.map.api.MapView;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class WriteRecruitmentFragment extends Fragment {
+public class WriteRecruitmentFragment extends Fragment implements MapView.MapViewEventListener {
     Context context;
     private MapView mapView;
     private ViewGroup mapViewContainer;
@@ -51,6 +52,8 @@ public class WriteRecruitmentFragment extends Fragment {
     private int headCnt = 1;
 
     private UserMarkerObject userMarkerObject;
+    public MapPoint.GeoCoordinate geoCoordinate;
+    public boolean startEndFlag = true; // start 커서에 true, end 커서에 false
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,8 +62,30 @@ public class WriteRecruitmentFragment extends Fragment {
 
         userMarkerObject = new UserMarkerObject();
 
+        title = root.findViewById(R.id.title);
+        startEt = root.findViewById(R.id.start_et);
+        endEt = root.findViewById(R.id.end_et);
+
+        // 위치 정보 클릭리스너 활용 startEt, endEt 클릭 리스너 (startEndFlag 활용)
+        startEt.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                startEndFlag = true;
+                return false;
+            }
+        });
+
+        endEt.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                startEndFlag = false;
+                return false;
+            }
+        }); // startEt, endEt 클릭 리스너
+
         if(homeFragment.isPermission()){
             mapView = new MapView(getActivity());
+            mapView.setMapViewEventListener(this);
             mapViewContainer = (ViewGroup) root.findViewById(R.id.write_map);
             mapViewContainer.addView(mapView);
         }
@@ -120,10 +145,6 @@ public class WriteRecruitmentFragment extends Fragment {
                         .commit();
             }
         }); // end of closeBtn
-
-        title = root.findViewById(R.id.title);
-        startEt = root.findViewById(R.id.start_et);
-        endEt = root.findViewById(R.id.end_et);
 
         // 출발지 디폴트 값 : 현위치
         LocationManager lm = (LocationManager) context.getSystemService(LOCATION_SERVICE);
@@ -224,4 +245,55 @@ public class WriteRecruitmentFragment extends Fragment {
         else
             navigationBarView.setVisibility(View.VISIBLE);
     }
-}
+
+    @Override
+    public void onMapViewInitialized(MapView mapView) {
+
+    }
+
+    @Override
+    public void onMapViewCenterPointMoved(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewZoomLevelChanged(MapView mapView, int i) {
+
+    }
+
+    @Override
+    public void onMapViewSingleTapped(MapView mapView, MapPoint mapPoint) {
+        Log.e("sss", "dgsdgsdg");
+        geoCoordinate = mapPoint.getMapPointGeoCoord();
+        if(startEndFlag) {
+                startEt.setText("(위도) " + geoCoordinate.latitude + " (경도) " + geoCoordinate.longitude);
+            } else {
+                endEt.setText("(위도) " + geoCoordinate.latitude + " (경도) " + geoCoordinate.longitude);
+            }
+    }
+
+    @Override
+    public void onMapViewDoubleTapped(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewLongPressed(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewDragStarted(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewDragEnded(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewMoveFinished(MapView mapView, MapPoint mapPoint) {
+
+    }
+} // end of class
