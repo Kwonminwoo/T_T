@@ -21,6 +21,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +37,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.t_t_android.ImageDB.ImageDBHelper;
 import com.example.t_t_android.login.LoginFragment;
+import com.example.t_t_android.settingRecyclerView.JoinedRecruitment;
+import com.example.t_t_android.settingRecyclerView.JoinedRecruitmentAdapter;
+import com.example.t_t_android.settingRecyclerView.MyRecruitment;
+import com.example.t_t_android.settingRecyclerView.MyRecruitmentAdapter;
 import com.kakao.sdk.user.UserApiClient;
 
 import kotlin.Unit;
@@ -53,6 +59,12 @@ public class SettingFragment extends Fragment {
     private ImageDBHelper imageDBHelper;
     private String nickname;
     private int PERMISSION_REQUEST_CODE = 1;
+
+    private RecyclerView joinedRecruitmentRV;
+    private JoinedRecruitmentAdapter joinedRecruitmentAdapter;
+    private RecyclerView myRecruitmentRV;
+    private MyRecruitmentAdapter myRecruitmentAdapter;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_setting, container, false);
@@ -62,7 +74,11 @@ public class SettingFragment extends Fragment {
         logoutButton = root.findViewById(R.id.logoutButton);
         withdrawButton = root.findViewById(R.id.withdrawButton);
         profileChangeButton=root.findViewById(R.id.profileChangeButton);
+        joinedRecruitmentRV=root.findViewById(R.id.joinedRecruitment);
+        myRecruitmentRV=root.findViewById(R.id.myRecruitment);
         loginFragment = new LoginFragment();
+
+        //프로필
         imageDBHelper = new ImageDBHelper(context);
         Bundle args = getArguments();
         nickname = args.getString("nickname");
@@ -97,6 +113,26 @@ public class SettingFragment extends Fragment {
                 }
             }
         });
+
+        //내가 참여한 모집글
+        LinearLayoutManager layoutManagerJR = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        joinedRecruitmentRV.setLayoutManager(layoutManagerJR);
+        joinedRecruitmentAdapter=new JoinedRecruitmentAdapter();
+        joinedRecruitmentAdapter.addItem(new JoinedRecruitment("공주대학교 천안캠퍼스", "천안복합터미널","4"));
+        joinedRecruitmentAdapter.addItem(new JoinedRecruitment("공주대학교 천안캠퍼스", "천안복합터미널","2"));
+        joinedRecruitmentAdapter.addItem(new JoinedRecruitment("공주대학교 천안캠퍼스", "천안복합터미널","3"));
+        joinedRecruitmentRV.setAdapter(joinedRecruitmentAdapter);
+
+        //내가 작성한 모집글
+        LinearLayoutManager layoutManagerMR = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        myRecruitmentRV.setLayoutManager(layoutManagerMR);
+        myRecruitmentAdapter=new MyRecruitmentAdapter();
+        myRecruitmentAdapter.addItem(new MyRecruitment("공주대학교 천안캠퍼스", "천안복합터미널","3"));
+        myRecruitmentAdapter.addItem(new MyRecruitment("공주대학교 천안캠퍼스", "천안복합터미널","2"));
+        myRecruitmentAdapter.addItem(new MyRecruitment("공주대학교 천안캠퍼스", "천안복합터미널","1"));
+        myRecruitmentRV.setAdapter(myRecruitmentAdapter);
+
+        //로그아웃
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,6 +156,8 @@ public class SettingFragment extends Fragment {
             }
         });
 
+
+        //탈퇴
         withdrawButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,6 +185,7 @@ public class SettingFragment extends Fragment {
 
     }
 
+    //프로필 사진 갤러리에서 고르기
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override

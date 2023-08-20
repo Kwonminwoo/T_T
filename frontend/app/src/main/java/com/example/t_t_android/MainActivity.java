@@ -47,12 +47,12 @@ public class MainActivity extends AppCompatActivity {
         settingFragment=new SettingFragment();
         loginFragment=new LoginFragment();
         Intent intent = getIntent();
-        if (loginFragment.isLoggedIn()==false) {
+        if (!loginFragment.isLoggedIn()) {
             Log.i("LOGIN", "로그인 안됨");
             navigationBarView.setVisibility(View.GONE);
             showLoginFragment();
         }
-        else if(loginFragment.isLoggedIn()==true)
+        else
         {
             Log.i("LOGIN", "로그인 성공 후 네비게이션 바 노출");
             navigationBarView.setVisibility(View.VISIBLE);
