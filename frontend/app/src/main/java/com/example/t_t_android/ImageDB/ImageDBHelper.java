@@ -1,0 +1,76 @@
+package com.example.t_t_android.ImageDB;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+
+public class ImageDBHelper extends SQLiteOpenHelper {
+    private static final String DB_NAME = "profile.db";
+    private static final String TABLE_NAME = "profile";
+    private static final String COLUMN_ID = "keyID";
+    private static final String COLUMN_PHOTO_URI = "photoURI";
+    private static final String COLUMN_USER_ID="userID";
+    private Context context;
+
+    public ImageDBHelper(Context context) {
+        super(context, DB_NAME, null, 1);
+        this.context = context;
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COLUMN_PHOTO_URI + " TEXT," + COLUMN_USER_ID + " TEXT"+
+                ")");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
+    }
+
+    //DB 생성
+
+    public void saveUserProfileToDatabase(String userID, Uri imageUri) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_ID, userID);
+        values.put(COLUMN_PHOTO_URI, imageUri.toString());
+        long rowId = db.insert(TABLE_NAME, null, values);
+        db.close();
+    }
+
+
+    public Uri loadImageFromDatabase() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = null;
+        Uri imageUri = null;
+        try {
+            cursor = db.query(TABLE_NAME, new String[]{COLUMN_PHOTO_URI}, null, null, null, null, COLUMN_ID + " DESC", "1");
+            if (cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndexOrThrow(COLUMN_PHOTO_URI);
+                String imageUriString = cursor.getString(columnIndex);
+                imageUri = Uri.parse(imageUriString);
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+        return imageUri;
+    }
+
+    public void initDB(){
+        SQLiteDatabase db = getReadableDatabase();
+        db.execSQL("DELETE FROM "+TABLE_NAME);
+        db.close();
+    }
+
+
+}

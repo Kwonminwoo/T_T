@@ -2,48 +2,44 @@ package com.example.t_t_android;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-<<<<<<< HEAD
-=======
 import androidx.fragment.app.FragmentManager;
->>>>>>> develop
 import androidx.fragment.app.FragmentTransaction;
-
 import android.Manifest;
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Build;
 import android.os.Bundle;
-<<<<<<< HEAD
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.ViewGroup;
-=======
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
->>>>>>> develop
-
+import com.example.t_t_android.ImageDB.ImageDBHelper;
 import com.example.t_t_android.login.LoginFragment;
 import com.google.android.material.navigation.NavigationBarView;
-
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.User;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
+import retrofit2.http.Url;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.RecursiveAction;
 
 public class MainActivity extends AppCompatActivity {
-<<<<<<< HEAD
-
     HomeFragment homeFragment;
     ChatFragment chatFragment;
     RecruitmentFragment recruitmentFragment;
     SettingFragment settingFragment;
     WriteRecruitmentFragment writeRecruitmentFragment;
-=======
     private HomeFragment homeFragment;
     private ChatFragment chatFragment;
     private RecruitmentFragment recruitmentFragment;
@@ -52,14 +48,11 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout main_container;
     private NavigationBarView navigationBarView;
     private long backpressedTime = 0;
-
->>>>>>> develop
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-<<<<<<< HEAD
-
+      
         Intent intent = getIntent();
         homeFragment = new HomeFragment();
         chatFragment = new ChatFragment();
@@ -68,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.main_containers, homeFragment).commit();
         NavigationBarView navigationBarView = findViewById(R.id.bottom_navigationView);
-=======
+
         main_container =findViewById(R.id.main_containers);
         navigationBarView = findViewById(R.id.bottom_navigationView);
         homeFragment=new HomeFragment();
@@ -77,16 +70,17 @@ public class MainActivity extends AppCompatActivity {
         settingFragment=new SettingFragment();
         loginFragment=new LoginFragment();
         Intent intent = getIntent();
-        if (loginFragment.isLoggedIn()==false) {
+        if (!loginFragment.isLoggedIn()) {
             Log.i("LOGIN", "로그인 안됨");
             navigationBarView.setVisibility(View.GONE);
             showLoginFragment();
         }
-        else if(loginFragment.isLoggedIn()==true)
+        else
         {
             Log.i("LOGIN", "로그인 성공 후 네비게이션 바 노출");
             navigationBarView.setVisibility(View.VISIBLE);
             onLoginSuccess();
+
         }
     }
     private void showLoginFragment(){
@@ -100,10 +94,30 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction removeTransaction = removeFragmentManager.beginTransaction();
         removeTransaction.remove(loginFragment).commit();
 
+        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+            @Override
+            public Unit invoke(User user, Throwable error) {
+                if (error != null) {
+                    Log.e("USER_INFO", "사용자 정보 요청 실패", error);
+                    return null;
+                }
+                String nickname = user.getKakaoAccount().getProfile().getNickname();
+                Uri profileImageUri  = Uri.parse(user.getKakaoAccount().getProfile().getProfileImageUrl());
+                Bundle userData = new Bundle();
+                userData.putString("nickname", nickname);
+                ImageDBHelper imageDBHelper = new ImageDBHelper(MainActivity.this);
+                if(imageDBHelper.loadImageFromDatabase()==null)
+                {
+                    imageDBHelper.saveUserProfileToDatabase(nickname, profileImageUri);
+                }
+                settingFragment.setArguments(userData);
+                return null;
+            }
+        });
         FragmentManager loginSuccessFM=getSupportFragmentManager();
         FragmentTransaction loginSuccseeFT = loginSuccessFM.beginTransaction();
         loginSuccseeFT.replace(R.id.main_containers,homeFragment).commit();
->>>>>>> develop
+
         navigationBarView.setSelectedItemId(R.id.menu_home);
 
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -126,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
 
     }
     @Override

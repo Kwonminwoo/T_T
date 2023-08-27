@@ -13,6 +13,8 @@
 =======
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
     <application
         android:name=".login.KakaoApplication"
 >>>>>>> develop
@@ -36,7 +38,7 @@
 
                 <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
                 <data android:host="oauth"
-                    android:scheme="kakaoe75f25902cc13e31a267438cad630c54" />
+                    android:scheme="kakao{kakao_native_app_key}" />
             </intent-filter>
         </activity>
         <activity
