@@ -35,10 +35,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.RecursiveAction;
 
 public class MainActivity extends AppCompatActivity {
-    HomeFragment homeFragment;
-    ChatFragment chatFragment;
-    RecruitmentFragment recruitmentFragment;
-    SettingFragment settingFragment;
     WriteRecruitmentFragment writeRecruitmentFragment;
     private HomeFragment homeFragment;
     private ChatFragment chatFragment;
@@ -69,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         recruitmentFragment=new RecruitmentFragment();
         settingFragment=new SettingFragment();
         loginFragment=new LoginFragment();
-        Intent intent = getIntent();
         if (!loginFragment.isLoggedIn()) {
             Log.i("LOGIN", "로그인 안됨");
             navigationBarView.setVisibility(View.GONE);
