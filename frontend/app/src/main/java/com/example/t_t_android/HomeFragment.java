@@ -2,67 +2,30 @@ package com.example.t_t_android;
 
 import static android.content.Context.LOCATION_SERVICE;
 import static android.graphics.Color.RED;
-import static androidx.core.content.ContextCompat.getSystemService;
-import static net.daum.mf.map.api.MapView.MapType.Hybrid;
-import static net.daum.mf.map.api.MapView.MapType.Satellite;
 import static net.daum.mf.map.api.MapView.MapType.Standard;
-import static net.daum.mf.map.n.api.internal.NativeMapLocationManager.isShowingCurrentLocationMarker;
-import static net.daum.mf.map.n.api.internal.NativeMapLocationManager.setCustomCurrentLocationMarkerImage;
-
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.Signature;
-import android.hardware.usb.UsbRequest;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
-import android.text.Layout;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.t_t_android.home.CustomCalloutBalloonAdapter;
 import com.example.t_t_android.home.MarkerEventListener;
 import com.example.t_t_android.home.UserMarkerObject;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import net.daum.mf.map.api.CalloutBalloonAdapter;
-import net.daum.mf.map.api.CameraUpdateFactory;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
-import net.daum.mf.map.api.MapPointBounds;
-import net.daum.mf.map.api.MapPolyline;
 import net.daum.mf.map.api.MapView;
-
-import org.w3c.dom.Text;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-import java.util.Map;
-import java.util.zip.Inflater;
-
-import com.example.t_t_android.home.UserMarkerObject;
-
-
 
 public class HomeFragment extends Fragment implements MapView.CurrentLocationEventListener, MapView.MapViewEventListener {
     private MapView mapView;
