@@ -2,21 +2,48 @@ package com.example.t_t_android;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+<<<<<<< HEAD
+=======
 import androidx.fragment.app.FragmentManager;
+>>>>>>> develop
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.os.Build;
 import android.os.Bundle;
+<<<<<<< HEAD
+import android.util.Base64;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.ViewGroup;
+=======
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+>>>>>>> develop
 
 import com.example.t_t_android.login.LoginFragment;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.RecursiveAction;
+
 public class MainActivity extends AppCompatActivity {
+<<<<<<< HEAD
+
+    HomeFragment homeFragment;
+    ChatFragment chatFragment;
+    RecruitmentFragment recruitmentFragment;
+    SettingFragment settingFragment;
+    WriteRecruitmentFragment writeRecruitmentFragment;
+=======
     private HomeFragment homeFragment;
     private ChatFragment chatFragment;
     private RecruitmentFragment recruitmentFragment;
@@ -26,10 +53,22 @@ public class MainActivity extends AppCompatActivity {
     private NavigationBarView navigationBarView;
     private long backpressedTime = 0;
 
+>>>>>>> develop
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+<<<<<<< HEAD
+
+        Intent intent = getIntent();
+        homeFragment = new HomeFragment();
+        chatFragment = new ChatFragment();
+        recruitmentFragment = new RecruitmentFragment();
+        settingFragment = new SettingFragment();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_containers, homeFragment).commit();
+        NavigationBarView navigationBarView = findViewById(R.id.bottom_navigationView);
+=======
         main_container =findViewById(R.id.main_containers);
         navigationBarView = findViewById(R.id.bottom_navigationView);
         homeFragment=new HomeFragment();
@@ -64,7 +103,9 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager loginSuccessFM=getSupportFragmentManager();
         FragmentTransaction loginSuccseeFT = loginSuccessFM.beginTransaction();
         loginSuccseeFT.replace(R.id.main_containers,homeFragment).commit();
+>>>>>>> develop
         navigationBarView.setSelectedItemId(R.id.menu_home);
+
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -96,5 +137,17 @@ public class MainActivity extends AppCompatActivity {
             finishAffinity();
         }
 
+    }
+
+    public void onFragmentChange(int index){
+        if (writeRecruitmentFragment == null) {
+            writeRecruitmentFragment = new WriteRecruitmentFragment();
+        }
+
+        if(index == 0){
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_containers, recruitmentFragment).commit();
+        } else if(index == 1){
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_containers, writeRecruitmentFragment).commit();
+        }
     }
 }
