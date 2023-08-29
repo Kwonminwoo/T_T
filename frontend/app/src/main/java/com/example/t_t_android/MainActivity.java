@@ -55,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
         recruitmentFragment = new RecruitmentFragment();
         settingFragment = new SettingFragment();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_containers, homeFragment).commit();
-        NavigationBarView navigationBarView = findViewById(R.id.bottom_navigationView);
+        navigationBarView = findViewById(R.id.bottom_navigationView);
 
         main_container =findViewById(R.id.main_containers);
         navigationBarView = findViewById(R.id.bottom_navigationView);
