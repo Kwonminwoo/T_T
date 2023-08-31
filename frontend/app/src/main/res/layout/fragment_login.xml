@@ -4,11 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".login.LoginFragment">
-    <Button
+    <android.widget.Button
         android:id="@+id/login_btn"
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="카카오로그인"
-        android:textSize="20dp"/>
+        android:text="카카오 로그인"
+        android:textSize="20dp"
+        android:background="@drawable/round_square_blue"/>
 </FrameLayout>
