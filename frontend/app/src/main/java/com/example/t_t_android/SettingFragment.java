@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -121,6 +122,8 @@ public class SettingFragment extends Fragment {
         joinedRecruitmentAdapter.addItem(new JoinedRecruitment("공주대학교 천안캠퍼스", "천안복합터미널","4"));
         joinedRecruitmentAdapter.addItem(new JoinedRecruitment("공주대학교 천안캠퍼스", "천안복합터미널","2"));
         joinedRecruitmentAdapter.addItem(new JoinedRecruitment("공주대학교 천안캠퍼스", "천안복합터미널","3"));
+        DividerItemDecoration dividerItemDecorationJR = new DividerItemDecoration(context, layoutManagerJR.getOrientation());
+        joinedRecruitmentRV.addItemDecoration(dividerItemDecorationJR);
         joinedRecruitmentRV.setAdapter(joinedRecruitmentAdapter);
 
         //내가 작성한 모집글
@@ -130,6 +133,8 @@ public class SettingFragment extends Fragment {
         myRecruitmentAdapter.addItem(new MyRecruitment("공주대학교 천안캠퍼스", "천안복합터미널","3"));
         myRecruitmentAdapter.addItem(new MyRecruitment("공주대학교 천안캠퍼스", "천안복합터미널","2"));
         myRecruitmentAdapter.addItem(new MyRecruitment("공주대학교 천안캠퍼스", "천안복합터미널","1"));
+        DividerItemDecoration dividerItemDecorationMR = new DividerItemDecoration(context, layoutManagerMR.getOrientation());
+        myRecruitmentRV.addItemDecoration(dividerItemDecorationMR);
         myRecruitmentRV.setAdapter(myRecruitmentAdapter);
 
         //로그아웃
