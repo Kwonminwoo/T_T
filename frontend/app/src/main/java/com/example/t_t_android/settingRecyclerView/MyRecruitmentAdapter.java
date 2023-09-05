@@ -65,9 +65,9 @@ public class MyRecruitmentAdapter extends RecyclerView.Adapter<MyRecruitmentAdap
         }
 
         public void setItem(MyRecruitment item){
-            tvStartMR.setText(item.getStart());
-            tvDestinationMR.setText(item.getDestination());
-            tvCrewNumberMR.setText(item.getCrewNumber());
+            tvStartMR.setText("출발지: "+item.getStart());
+            tvDestinationMR.setText("목적지: "+item.getDestination());
+            tvCrewNumberMR.setText("인원수: "+item.getCrewNumber());
         }
     }
 }
