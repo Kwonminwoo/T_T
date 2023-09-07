@@ -2,6 +2,7 @@ package com.example.t_t_android;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -57,9 +58,29 @@ public class RecruitmentFragment extends Fragment {
         recruitmentItemsAdapter.addItem(new RecruitmentItems("터미널 갈 사람 구함", "20230303","공주대학교 천안캠퍼스", "천안복합터미널","2"));
         recruitmentItemsAdapter.addItem(new RecruitmentItems("공주대에서 터미널 갈 사람", "20230315","공주대", "천안복합터미널","3"));
         DividerItemDecoration dividerItemDecorationRI = new DividerItemDecoration(context, layoutManagerRI.getOrientation());
+        RecruitmentRV.addItemDecoration(new RecyclerViewDecoration(60));
         RecruitmentRV.addItemDecoration(dividerItemDecorationRI);
         RecruitmentRV.setAdapter(recruitmentItemsAdapter);
 
+
+
         return root;
+    }
+}
+
+class RecyclerViewDecoration extends RecyclerView.ItemDecoration {
+
+    private final int divHeight;
+
+    public RecyclerViewDecoration(int divHeight)
+    {
+        this.divHeight = divHeight;
+    }
+
+    @Override
+    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state)
+    {
+        super.getItemOffsets(outRect, view, parent, state);
+        outRect.top = divHeight;
     }
 }

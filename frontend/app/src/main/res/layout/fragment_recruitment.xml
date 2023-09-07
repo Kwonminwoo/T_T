@@ -27,6 +27,7 @@
 
             <ImageButton
                 android:id="@+id/seach_button"
+                android:backgroundTint="@color/white"
                 android:src="@drawable/search_icon_creative_stall_premium"
                 android:layout_gravity="right|center"></ImageButton>
 
@@ -46,7 +47,8 @@
                 android:textAlignment="center"
                 android:layout_marginBottom="5dp"
                 android:textStyle="bold"
-                android:background="@drawable/round_square_mint"/>
+                android:background="@drawable/round_square_mint"
+                android:layout_marginEnd="20dp"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RecruitmentItem"
                 android:layout_width="match_parent"
@@ -64,7 +66,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:src="@drawable/ic_my_icon"
-        android:layout_margin="16dp" />
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/white"/>
 
 
 
