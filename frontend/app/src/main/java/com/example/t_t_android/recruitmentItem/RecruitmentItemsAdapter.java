@@ -21,7 +21,7 @@ public class RecruitmentItemsAdapter extends RecyclerView.Adapter<RecruitmentIte
     @Override
     public RecruitmentItemsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.fragment_recruitment_items, parent, false);
+        View itemView = inflater.inflate(R.layout.recruitment_items, parent, false);
 
         return new RecruitmentItemsAdapter.ViewHolder(itemView);
     }
@@ -50,12 +50,13 @@ public class RecruitmentItemsAdapter extends RecyclerView.Adapter<RecruitmentIte
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvTitleRI, tvDateRI, tvStartRI, tvDestinationRI, tvCrewNumberRI;
+        TextView tvTitleRI, tvDateRI, tvTimeRI, tvStartRI, tvDestinationRI, tvCrewNumberRI;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitleRI = itemView.findViewById(R.id.title_tv);
-            tvDateRI = itemView.findViewById(R.id.time_tv);
+            tvDateRI = itemView.findViewById(R.id.date_tv);
+            tvTimeRI = itemView.findViewById(R.id.time_tv);
             tvStartRI = itemView.findViewById(R.id.tvStartRI);
             tvDestinationRI = itemView.findViewById(R.id.tvDestinationRI);
             tvCrewNumberRI = itemView.findViewById(R.id.tvCrewNumberRI);
@@ -66,6 +67,7 @@ public class RecruitmentItemsAdapter extends RecyclerView.Adapter<RecruitmentIte
             Log.e(itemRI.getTitle(), itemRI.getDate());
             tvTitleRI.setText(itemRI.getTitle());
             tvDateRI.setText(itemRI.getDate());
+            tvTimeRI.setText(itemRI.getTime());
             tvStartRI.setText("출발지: "+itemRI.getStart());
             tvDestinationRI.setText("목적지: "+itemRI.getDestination());
             tvCrewNumberRI.setText("인원수: "+itemRI.getCrewNumber() + " / 4");

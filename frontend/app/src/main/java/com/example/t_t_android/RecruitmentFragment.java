@@ -51,12 +51,12 @@ public class RecruitmentFragment extends Fragment {
         LinearLayoutManager layoutManagerRI = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         RecruitmentRV.setLayoutManager(layoutManagerRI);
         recruitmentItemsAdapter = new RecruitmentItemsAdapter();
-        recruitmentItemsAdapter.addItem(new RecruitmentItems("터미널 갈 사람", "20230922","공주대학교 천안캠퍼스", "천안복합터미널","4"));
-        recruitmentItemsAdapter.addItem(new RecruitmentItems("터미널 갈 사람 구함", "20230303","공주대학교 천안캠퍼스", "천안복합터미널","2"));
-        recruitmentItemsAdapter.addItem(new RecruitmentItems("공주대에서 터미널 갈 사람", "20230315","공주대", "천안복합터미널","3"));
-        recruitmentItemsAdapter.addItem(new RecruitmentItems("터미널 갈 사람", "20230922","공주대학교 천안캠퍼스", "천안복합터미널","4"));
-        recruitmentItemsAdapter.addItem(new RecruitmentItems("터미널 갈 사람 구함", "20230303","공주대학교 천안캠퍼스", "천안복합터미널","2"));
-        recruitmentItemsAdapter.addItem(new RecruitmentItems("공주대에서 터미널 갈 사람", "20230315","공주대", "천안복합터미널","3"));
+        recruitmentItemsAdapter.addItem(new RecruitmentItems("터미널 갈 사람", "20230922", 9, 22,"공주대학교 천안캠퍼스", "천안복합터미널","4"));
+        recruitmentItemsAdapter.addItem(new RecruitmentItems("터미널 갈 사람 구함", "20230303", 11, 43,"공주대학교 천안캠퍼스", "천안복합터미널","2"));
+        recruitmentItemsAdapter.addItem(new RecruitmentItems("공주대에서 터미널 갈 사람", "20230315", 12, 43, "공주대", "천안복합터미널","3"));
+        recruitmentItemsAdapter.addItem(new RecruitmentItems("터미널 갈 사람", "20230922",22, 43,"공주대학교 천안캠퍼스", "천안복합터미널","4"));
+        recruitmentItemsAdapter.addItem(new RecruitmentItems("터미널 갈 사람 구함", "20230303",3, 53, "공주대학교 천안캠퍼스", "천안복합터미널","2"));
+        recruitmentItemsAdapter.addItem(new RecruitmentItems("공주대에서 터미널 갈 사람", "20230315", 4, 0, "공주대", "천안복합터미널","3"));
         DividerItemDecoration dividerItemDecorationRI = new DividerItemDecoration(context, layoutManagerRI.getOrientation());
         RecruitmentRV.addItemDecoration(new RecyclerViewDecoration(60));
         RecruitmentRV.addItemDecoration(dividerItemDecorationRI);
