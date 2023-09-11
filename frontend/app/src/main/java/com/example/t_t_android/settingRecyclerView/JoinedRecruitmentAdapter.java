@@ -61,7 +61,6 @@ public class JoinedRecruitmentAdapter extends RecyclerView.Adapter<JoinedRecruit
             tvCrewNumberJR=itemView.findViewById(R.id.tvCrewNumberJR);
 
         }
-
         public void setItem(JoinedRecruitment itemJR){
             tvStartJR.setText("출발지: "+itemJR.getStart());
             tvDestinationJR.setText("목적지: "+itemJR.getDestination());
