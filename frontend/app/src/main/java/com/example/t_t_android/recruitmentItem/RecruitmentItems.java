@@ -10,23 +10,24 @@ import android.view.ViewGroup;
 
 import com.example.t_t_android.R;
 
-public class RecruitmentItems extends Fragment {
+import java.io.Serializable;
 
-    private String title;
-    private String date;
-    private int hour, min;
-    private String start;
-    private String destination;
-    private  String crewNumber;
+public class RecruitmentItems extends Fragment implements Serializable {
 
-    public RecruitmentItems (String title, String date, int hour, int min, String start, String destination, String crewNumber){
+    private String title, date, crewNumber, contents;
+    private int hour, min, crewNum;
+    private double startLat, startLon, endLat, endLon;
+
+    public RecruitmentItems (String title, String date, int hour, int min, double startLat, double startLon, double endLat, double endLon, int crewNum){
         this.title = title;
         this.date = date;
         this.hour = hour;
         this.min = min;
-        this.start=start;
-        this.destination=destination;
-        this.crewNumber=crewNumber;
+        this.startLat = startLat;
+        this.startLon = startLon;
+        this.endLat = endLat;
+        this.endLon = endLon;
+        this.crewNum=crewNum;
     }
 
     public String getTitle() {
@@ -40,16 +41,37 @@ public class RecruitmentItems extends Fragment {
         String time = (String.format("%02d : %02d", hour, min));
         return time;
     }
-    public String getStart(){
-        return start;
+    public double getStartLat(){
+        return startLat;
+    }
+    public double getStartLon(){
+        return startLon;
+    }
+    public double getEndLat(){
+        return endLat;
+    }
+    public double getEndLon(){
+        return endLon;
     }
 
-    public String getDestination(){
-        return destination;
+    public void setStartLat(double startLat) {
+        this.startLat = startLat;
+    }
+    public void setStartLon(double startLon) {
+        this.startLon = startLon;
+    }
+    public void setEndLon(double endLon) {
+        this.endLon = endLon;
+    }
+    public void setEndLat(double endLat) {
+        this.endLat = endLat;
     }
 
-    public String getCrewNumber(){
-        return crewNumber;
+    public int getCrewNum(){
+        return crewNum;
+    }
+    public String getContents() {
+        return contents;
     }
 
     public void setTitle(String title) {
@@ -60,15 +82,11 @@ public class RecruitmentItems extends Fragment {
         this.date = date;
     }
 
-    public void setStart(String start){
-        this.start=start;
+    public void setContents(String contents) {
+        this.contents = contents;
     }
 
-    public void setDestination(String destination){
-        this.destination=destination;
-    }
-
-    public void setCrewNumber(String crewNumber){
-        this.crewNumber=crewNumber;
+    public void setCrewNum(String crewNum){
+        this.crewNumber=crewNum;
     }
 }
