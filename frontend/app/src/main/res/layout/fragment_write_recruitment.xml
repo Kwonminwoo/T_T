@@ -7,6 +7,7 @@
     tools:context=".WriteRecruitmentFragment">
 
     <LinearLayout
+        android:background="@color/green"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -21,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/close_icon"
-                android:background="#ffffff"
+                android:background="@color/green"
                 android:id="@+id/closeBtn"
                 />
 
@@ -37,6 +38,7 @@
                 android:id="@+id/completeBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/blue"
                 android:text="완료"></Button>
 
         </GridLayout>
@@ -55,6 +57,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:background="@color/yellow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -92,7 +95,8 @@
                         android:src="@drawable/close_icon_24px_by_inkubators"
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
-                        android:background="#ffffff">
+                        android:background="@drawable/round_square_green"
+                        android:padding="4dp">
                     </ImageButton>
                 </LinearLayout>
 
@@ -115,8 +119,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
-                        android:background="#ffffff"
-                        android:src="@drawable/close_icon_24px_by_inkubators"></ImageButton>
+                        android:background="@drawable/round_square_green"
+                        android:src="@drawable/close_icon_24px_by_inkubators"
+                        android:padding="4dp"></ImageButton>
                 </LinearLayout>
 
 
@@ -135,11 +140,12 @@
 
             </LinearLayout>
             <GridLayout
+                android:background="@color/green"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10sp"
-                android:layout_marginBottom="10sp">
+                android:padding="4dp">
                 <TextView
+                    android:layout_marginLeft="10sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="인원"
@@ -149,15 +155,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:background="#ECECEC"
+                    android:background="@color/green"
                     android:layout_gravity="right"
-                    android:layout_marginRight="20sp">
+                    android:layout_marginRight="20sp"
+                    android:padding="4dp">
                     <ImageButton
                         android:id="@+id/minus_people_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/minus_icon24px_by_inkubators">
-
+                        android:src="@drawable/minus_icon24px_by_inkubators"
+                        android:background="@drawable/round_square_blue"
+                        android:layout_gravity="center"
+                        android:scaleType="fitCenter"
+                        android:padding="4dp">
                     </ImageButton>
 
                     <TextView
@@ -175,7 +185,11 @@
                         android:id="@+id/plus_people_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/add_icon_big_by_joalfa">
+                        android:src="@drawable/add_icon_big_by_joalfa"
+                        android:background="@drawable/round_square_blue"
+                        android:layout_gravity="center"
+                        android:scaleType="fitCenter"
+                        android:padding="4dp">
 
                     </ImageButton>
 
